@@ -40,6 +40,12 @@
           el.value = w.trim();
         });
         document.getElementById('analogy4').value = "";
+        makeAnalogyRequest();
+      }
+      function moreDistanceExamples(el) {
+        var word = el.innerHTML
+        document.getElementById('distance-input').value = word;
+        getResult('/distance', word);
       }
     </script>
   </head>
@@ -50,6 +56,12 @@
         <legend>نزدیک‌ترین به:</legend>
         کلمه: <input id="distance-input" type="text" value="پسته">
         <button type="button" onclick="getResult('/distance', document.getElementById('distance-input').value)">بیاب</button> <span id="distance-result"></span>
+        <div>
+          <p>مثالهای بیشتر:</p>
+          <a href="javascript:;" onclick="moreDistanceExamples(this);">موشواره</a><br/>
+          <a href="javascript:;" onclick="moreDistanceExamples(this);">رایانه</a><br/>
+          <a href="javascript:;" onclick="moreDistanceExamples(this);">سنتور</a>
+        </div>
       </fieldset>
       <br>
       <fieldset>
