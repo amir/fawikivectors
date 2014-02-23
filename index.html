@@ -33,9 +33,8 @@
           getResult('/analogy', words.join(' '))
         }
       }
-      function moreAnalogyExamples() {
-        var target = event.target;
-        var words = target.innerHTML.split('،');
+      function moreAnalogyExamples(el) {
+        var words = el.innerHTML.split('،');
         words.forEach(function(w, i) {
           var el = document.getElementById('analogy' + (i + 1));
           el.value = w.trim();
