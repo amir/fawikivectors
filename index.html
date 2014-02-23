@@ -33,6 +33,15 @@
           getResult('/analogy', words.join(' '))
         }
       }
+      function moreAnalogyExamples() {
+        var target = event.target;
+        var words = target.innerHTML.split('،');
+        words.forEach(function(w, i) {
+          var el = document.getElementById('analogy' + (i + 1));
+          el.value = w.trim();
+        });
+        document.getElementById('analogy4').value = "";
+      }
     </script>
   </head>
   <body>
@@ -48,7 +57,19 @@
         <legend>تمثیل:</legend>
         نسبته <input type="text" id="analogy1" value="پسر"> به <input type="text" id="analogy2" value="پدر">، همانند نسبته <input type="text" id="analogy3" value="دختر"> است به <input type="text" id="analogy4" disabled>.
         <button type="button" onclick="makeAnalogyRequest()">بیاب</button>
+        <div>
+          <p>مثالهای بیشتر:</p>
+          <a href="javascript:;" onclick="moreAnalogyExamples(this);">خاله، مادر، عمه</a><br/>
+          <a href="javascript:;" onclick="moreAnalogyExamples(this);">پرسپولیس، استقلال، سپاهان</a>
+        </div>
       </fieldset>
+    </div>
+    <div>
+      <ul>
+        <li>با استفاده از <a href="https://code.google.com/p/word2vec/">word2vec</a></li>
+        <li>متن برنامه در <a href="https://github.com/amir/fawikivectors">گیت‌هاب</a></li>
+        <li><a href="https://gist.github.com/amir/9171330">اسکریپت</a> پرل استفاده شده جهت آماده‌سازی دامپ ویکی‌پدیای فارسی</li>
+      </ul>
     </div>
   </body>
 </html>
