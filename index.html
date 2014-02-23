@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html lang="fa" dir="rtl">
+  <head>
+    <title></title>
+    <script type="text/javascript">
+      function getResult(endpoint, words) {
+        var request = new XMLHttpRequest;
+        request.open('GET', endpoint + '?word=' + words, true);
+        request.onload = function() {
+          if (request.status == 200) {
+            if (endpoint == '/distance') {
+              document.getElementById('distance-result').innerHTML = request.responseText;
+            } else if (endpoint == '/analogy') {
+              document.getElementById('analogy4').value = request.responseText;
+            }
+          }
+        }
+        request.onerror = function(a, b) {
+          alert(a, b);
+        }
+        request.send();
+      }
+      function makeAnalogyRequest() {
+        var words = [];
+        [1,2,3].forEach(function(id) {
+          var el = document.getElementById('analogy' + id);
+          words.push(el.value);
+        });
+        words = words.join(' ').split(' ');
+        if (words.length != 3) {
+          alert("تنها ۳ کلمه.");
+        } else {
+          getResult('/analogy', words.join(' '))
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <h1>محاسبات مبتنی بر بازنمایش برداری کلمات موجود در مجموعه متن ویکی‌پدیا فارسی</h1>
+    <div>
+      <fieldset>
+        <legend>نزدیک‌ترین به:</legend>
+        کلمه: <input id="distance-input" type="text" value="پسته">
+        <button type="button" onclick="getResult('/distance', document.getElementById('distance-input').value)">بیاب</button> <span id="distance-result"></span>
+      </fieldset>
+      <br>
+      <fieldset>
+        <legend>تمثیل:</legend>
+        نسبته <input type="text" id="analogy1" value="پسر"> به <input type="text" id="analogy2" value="پدر">، همانند نسبته <input type="text" id="analogy3" value="دختر"> است به <input type="text" id="analogy4" disabled>.
+        <button type="button" onclick="makeAnalogyRequest()">بیاب</button>
+      </fieldset>
+    </div>
+  </body>
+</html>
